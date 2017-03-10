@@ -1,43 +1,19 @@
-<style>
-    ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #FF7F66;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #555;
-    color: white;
-}
-ul#menu li {
-    display:inline;
-}
-</style>
+<font face = "Avenir" color="darkblue">
 <div align="center">
+      <img src="imagenes/logo.png" width="100" height="100">
     <h1>
-        <font face = "Century Gothic" color="darkblue"><b>Yaj&uacute; Respuestas</b></font>
+<b>Yaj&uacute; Respuestas</b>
     </h1>
     
     
 </div>
 <ul id="menu">
-  <li><a href="index.php">Inicio</a></li>
-  <li><a href="categoriastodas.php">Categorias</a></li>
+  <li><a href="index.php"><img  src = "imagenes/home.png" height="14" width="20">&nbsp; Inicio</a></li>
+  <li><a href="categoriastodas.php">Categor&iacute;as</a></li>
   <li><a href="preguntastodas.php">Preguntas</a></li>
   <li><a href="about.php">Acerca De</a></li>
+    <li style="float: right;">
+      <a href="<?=$_SERVER["HTTP_REFERER"]?>"><img  src = "imagenes/back.png" height="14" width="22"> </a>
+   </li>
+  
 </ul>
-<p><a href="<?=$_SERVER["HTTP_REFERER"]?>">Atras</a></p>
-<hr />

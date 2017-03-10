@@ -5,7 +5,7 @@ if(isset($_GET["pagina"]))
 if(($_GET["pagina"])>0)
 $pagina = $_GET["pagina"];
 $inicio = $pagina * $maxReg;
-$sqlCompleto = "SELECT MAX(id) FROM preguntas";
+$sqlCompleto = "SELECT MAX(id) FROM categorias";
 $result = $conn->query($sqlCompleto);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -15,46 +15,47 @@ if ($result->num_rows > 0) {
 $totalReg = ($resultado);
 $totalPag = ceil($totalReg/$maxReg)-1;
 $cursor = null;
-$sqldos="SELECT categoria from categorias";
+$sqldos="SELECT categoria from categorias order by id LIMIT ".$inicio.",".$maxReg;
 ?>
 <html>
 <head>
-    <title>Yajú Respuestas</title>
+    <title>Yaj&uacute; Respuestas</title>
+      <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
+    <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-    <font face = "Century Gothic">
-    
+<body>    
     <?php require_once("cabecera.php");?>
     
     <br />
     <div align = "center">
-       <h2>Categorias</h2> 
+       <h2>Categor&iacute;as</h2> 
     </div>
-    <table width = 1200>
+<table>
         <tr>
-        <td><b><font face = "Century Gothic" color="darkblue">Categorías</font></b></td>
+        <td><b>Categor&iacute;as</b></td>
         <td align=right><?php
         session_start();
+        if(isset($_SESSION["loged"])){
         if($_SESSION["loged"] == true){
             ?>
             <p><? echo($_SESSION["nombres"]);?></p>
             <p>Puntaje:<? echo($_SESSION["puntaje"]);?></p>
-            <p><img src="https://firebasestorage.googleapis.com/v0/b/yaju-201ac.appspot.com/o/usuarios%2F<?php echo($_SESSION["nick"]);?>.jpg?alt=media"  style="width:width;height:height;"></p>
+            <p><img src="https://firebasestorage.googleapis.com/v0/b/yaju-201ac.appspot.com/o/usuarios%2F<?php echo($_SESSION["nick"]);?>.jpg?alt=media"  height="50" width="50"></p>
             <a href=perfil.php>Mi Perfil</a>
             <a href=logout.php>Cerrar Sesi&oacute;n</a>
           <?php  
-        }
+        }}
         else{
         ?>
+                  <b>Inicia Sesi&oacute;n</b>
         <form name="frm" method="post" action="login.php">
             <p>Usuario: <input type="text" name="txtUser"/></p>
             <p>Password: <input type="password" name="txtPassword"/></p>
             <p><input type="submit" name="btnSubmit" value="Login"/></p>
         </form>
         <br />
-            <font face = "Century Gothic" color="darkblue">
-        <a href=registro.php>Regístrate</a>
-            </font>
+        <a href=registro.php>Reg&iacute;strate</a>
         <?php
         }
         ?></td>
@@ -72,14 +73,15 @@ $sqldos="SELECT categoria from categorias";
         }
         $cursor = null;
 ?>
-
+<tr><td><br /></td>
+      </tr>
 <tr>
     <td >
         <?php
             if($pagina>0)
             {
         ?>
-                <a href="categorias.php?pagina=<?php echo($pagina-1); ?>">
+                <a href="categoriastodas.php?pagina=<?php echo($pagina-1); ?>">
                     Anteriores
                 </a>
         <?php
@@ -93,7 +95,7 @@ $sqldos="SELECT categoria from categorias";
             if($pagina<$totalPag)
             {
         ?>
-            <a href="categorias.php?pagina=<?php echo($pagina+1); ?>">
+            <a href="categoriastodas.php?pagina=<?php echo($pagina+1); ?>">
                 Siguientes
             </a>
         <?php
@@ -104,7 +106,6 @@ $sqldos="SELECT categoria from categorias";
     </td>
 </tr>
     </table>
-    </font>
     <?php require_once("pie.php");?>
 </body>
 </html>

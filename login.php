@@ -4,7 +4,6 @@ $usuario = $_POST["txtUser"];
 $password = $_POST["txtPassword"];
 
 $sql = "select nick, password, nombres, puntaje from usuarios where nick = '".$usuario."' AND password = '".$password."'";
-echo($sql); 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -18,7 +17,7 @@ if ($result->num_rows > 0) {
     }
 }
 else{
-    //header("location:error.php"); 
+    header("location:error.php"); 
 }
 mysqli_close($conn);
 ?>

@@ -40,7 +40,9 @@ var uploadTask = storageRef.child('images/' + <?php echo($nick."jpg")?>).put(arc
       window.alert("archivo");
   }
 </script>
-</head>
+      <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
 <body>
 </body>    
 </html>

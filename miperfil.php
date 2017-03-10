@@ -8,16 +8,16 @@ if(isset($_GET["pregunta"])){
 ?>
 <html>
 <head>
-    <title>Yajú Respuestas</title>
+    <title>Yaj&uacute; Respuestas</title>
+      <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
+    <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-    <font face = "Century Gothic">
-    
+<body>    
     <?php require_once("cabecera.php");?>
-    
     <br />
     <div align = "center">
-       <h2><?php echo($_SESSION["nombres"])?></h2> 
+       <h2><?php if(isset($_SESSION["nombres"])){echo($_SESSION["nombres"]);}?></h2> 
     </div>
     <ul id="menu">
   <li><a href="mispreguntas.php">Inicio</a></li>
@@ -25,7 +25,6 @@ if(isset($_GET["pregunta"])){
 </ul>
 <p><a href="<?=$_SERVER["HTTP_REFERER"]?>">Atras</a></p>
 <hr /> 
-    </font>
     <?php require_once("pie.php");?>
 </body>
 </html>

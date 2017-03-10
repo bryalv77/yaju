@@ -1,5 +1,7 @@
 <?php
 require_once("funciones.php");
+if(isset($_POST['txtNick']) && isset($_POST['txtName']) && isset($_POST['txtLastName']) && isset($_POST['txtBirthday']) && isset($_POST['txtCorreo']) && isset($_POST['rd']) && isset($_POST['txtPassword'])) {
+
 $nick = $_POST["txtNick"];
 $nombre = $_POST["txtName"];
 $apellido = $_POST["txtLastName"];
@@ -7,7 +9,6 @@ $fecha = $_POST["txtBirthday"];
 $correo = $_POST["txtCorreo"];
 $sexo = $_POST["rd"];
 $password = $_POST["txtPassword"];
-$foto = $_POST["image-file"];
 $puntuacion = 10;
 
 
@@ -21,26 +22,5 @@ if (mysqli_query($conn, $sql)) {
     header("location:auxaux.php");  
 } 
 mysqli_close($conn);
+}
 ?>
-<html>
-<head>
-<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js">
-  function subir(){
-      window.alert("archivo"); 
-  var config = {
-    apiKey: "AIzaSyDXTTLf6Gd3DdyMvNrtaxArmgqm-UrW6Aw",
-    authDomain: "yaju-201ac.firebaseapp.com",
-    databaseURL: "https://yaju-201ac.firebaseio.com",
-    storageBucket: "yaju-201ac.appspot.com",
-    messagingSenderId: "1052977603772"
-  };
-  firebase.initializeApp(config);
-var archivo  = '<?php echo $foto;?>';
-var uploadTask = storageRef.child('images/' + <?php echo($nick."jpg")?>).put(archivo);
-      window.alert("archivo");
-  }
-</script>
-</head>
-<body>
-</body>    
-</html>

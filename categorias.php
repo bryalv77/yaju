@@ -18,49 +18,50 @@ if ($result->num_rows > 0) {
 $totalReg = ($resultado);
 $totalPag = ceil($totalReg/$maxReg)-1;
 $cursor = null;
-$sqldos="SELECT preguntas, fecha, hora from preguntas where categoria = '".$cat."' order by fecha desc, hora desc";
+$sqldos="SELECT preguntas, nick, fecha, hora from preguntas where categoria = '".$cat."' order by fecha desc, hora desc";
 
 ?>
 <html>
 <head>
-    <title>Yajú Respuestas</title>
+    <title>Yaj&uacute; Respuestas</title>
+      <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
+    <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-    <font face = "Century Gothic">
-    
+<body>    
     <?php require_once("cabecera.php");?>
-    
     <br />
     <div align = "center">
        <h2><?php echo($cat)?></h2> 
     </div>
-    <table width = 1200>
+<table>
         <tr>
-        <td><b><font face = "Century Gothic" color="darkblue">Preguntas</font></b></td>
-        <td><b><font face = "Century Gothic" color="darkblue">Fecha</font></b></td>
-        <td><b><font face = "Century Gothic" color="darkblue">Hora</font></b></td>
+        <td><b>Preguntas</b></td>
+          <td><b>Usuario</b></td>
+        <td><b>Fecha</b></td>
+        <td><b>Hora</b></td>
         <td align=right><?php
         session_start();
+       if(isset($_SESSION["loged"])){
         if($_SESSION["loged"] == true){
             ?>
             <p><? echo($_SESSION["nombres"]);?></p>
             <p>Puntaje:<? echo($_SESSION["puntaje"]);?></p>
-            <p><img src="https://firebasestorage.googleapis.com/v0/b/yaju-201ac.appspot.com/o/usuarios%2F<?php echo($_SESSION["nick"]);?>.jpg?alt=media"  style="width:width;height:height;"></p>
+            <p><img src="https://firebasestorage.googleapis.com/v0/b/yaju-201ac.appspot.com/o/usuarios%2F<?php echo($_SESSION["nick"]);?>.jpg?alt=media"  height="50" width="50"></p>
             <a href=perfil.php>Mi Perfil</a>
             <a href=logout.php>Cerrar Sesi&oacute;n</a>
           <?php  
-        }
+        }}
         else{
         ?>
+                  <b>Inicia Sesi&oacute;n</b>
         <form name="frm" method="post" action="login.php">
             <p>Usuario: <input type="text" name="txtUser"/></p>
             <p>Password: <input type="password" name="txtPassword"/></p>
             <p><input type="submit" name="btnSubmit" value="Login"/></p>
         </form>
         <br />
-            <font face = "Century Gothic" color="darkblue">
-        <a href=registro.php>Regístrate</a>
-            </font>
+        <a href=registro.php>Reg&iacute;strate</a>
         <?php
         }
         ?></td>
@@ -71,7 +72,8 @@ $sqldos="SELECT preguntas, fecha, hora from preguntas where categoria = '".$cat.
             while($row = $result->fetch_assoc()) {
 ?>
             <tr>
-                <td><a href="preguntas.php?pregunta=<?php echo($row["preguntas"]);?>"><?php echo($row["preguntas"])?></a></td>
+                <td><a href="preguntas.php?pregunta=<?php echo($row["preguntas"]);?>&ni=<?php echo($row["nick"]);?>"><?php echo($row["preguntas"])?></a></td>
+              <td><?php echo($row["nick"]);?></td>
                 <td>
                     <?php echo($row["fecha"])?>
                 </td>
@@ -88,7 +90,7 @@ $sqldos="SELECT preguntas, fecha, hora from preguntas where categoria = '".$cat.
             }   
         $cursor = null;
 ?>
-
+<tr></tr>
 <tr>
     <td >
         <?php
@@ -122,6 +124,7 @@ $sqldos="SELECT preguntas, fecha, hora from preguntas where categoria = '".$cat.
     </table>
         <br /><br /><br />
         <?php
+        if(isset($_SESSION["loged"])){
         if($_SESSION["loged"] == true){
             ?>
             <form name="frm" method="post" action="preguntando.php?categoria=<?php echo($cat);?>">
@@ -129,16 +132,13 @@ $sqldos="SELECT preguntas, fecha, hora from preguntas where categoria = '".$cat.
             <p><input type="submit" name="btnSubmit" value="Preguntar"/></p>
         </form>
           <?php  
-        }
+        }}
         else{
         ?>
        <h2>Inicie sesi&oacute;n para responder</h2>
         <?php
         }
         ?>
-     
-        
-    </font>
     <?php require_once("pie.php");?>
 </body>
 </html>

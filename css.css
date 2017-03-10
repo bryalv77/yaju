@@ -1,14 +1,76 @@
 body{
-    font-family: "Century Gothic";
-    background-color: #FFF6E5;
-    color:#3E454C;
+    font-family: 'Roboto Condensed','Avenir',sans-serif;
+    background-color: #ECF0F1;
+    color:#3498DB;
+
+}
+
+table:not(.special){
+  width:100%;
+}
+h5{
+  color:#3498DB;
+}
+footer {
+  background-color:#2C3E50;
+  position: fixed;
+  bottom: 0px;    
+  width: 100%;
+  color:#3498DB;
+  
+}
+input[type="text"]
+{
+  font-family: 'Roboto Condensed','Avenir',sans-serif;
+  font-size:14px;
+}
+input[type="password"]
+{
+  font-family: 'Roboto Condensed','Avenir',sans-serif;
+  font-size:14px;
+}
+input[type="submit"]
+{
+  font-family: 'Roboto Condensed','Avenir',sans-serif;
+  font-size:14px;
 }
 a {
     color: #3E454C;
+  text-decoration: none;
 }
-h1{
-    color:#2185C5;
+a:hover{
+  background-color: #555;
+    color: white;
 }
 h2{
     color:#2185C5;
+}
+ul {
+    list-style-type: none;
+
+    padding: 0;
+    overflow: hidden;
+    background-color: #E74C3C;
+     valign: middle;
+}
+
+li {
+    float: left;
+}
+h1{
+    color: #2C3E50;
+  }
+li a {
+    display: block;
+    color: #2C3E50;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+ul#menu li {
+    display:inline;
 }
