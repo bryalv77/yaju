@@ -1,6 +1,9 @@
 <?php
+
+$parametros = $_SERVER['REQUEST_URI'];
+$url =  "http://{$_SERVER['HTTP_HOST']}";
 $pathImg = "http://localhost/sabados/Proyecto Final/imagenes/";
-$maxReg = 20; //Número de registros por página
+$maxReg = 10; //Número de registros por página
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -46,6 +49,13 @@ function FechaCorta($fecha){
             $cad=$cad.$dia." de ".$mesenletras." de ".$año;    
             return $cad;
         }
+//calcular dias transcurridos de dos fecha
+function dias_transcurridos($fecha_i,$fecha_f)
+{
+	$dias	= (strtotime($fecha_i)-strtotime($fecha_f))/86400;
+	$dias 	= abs($dias); $dias = floor($dias);		
+	return $dias;
+}
 
 echo("<!DOCTYPE html>");
 ?>

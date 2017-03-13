@@ -5,11 +5,12 @@ require_once("funciones.php");
 <head>
   <title>Yaj&uacute; Respuestas</title>
   <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
-  <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="estilos.css" media="screen" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
 <script>
 
   $( function() {
@@ -119,10 +120,41 @@ $('.email').focusout(function(){
      return false;
     }
   }
+  
+  var loadFile = (function(event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+              });
+         
+       
+function uploadFile(){
+  var config = {
+    apiKey: "AIzaSyDXTTLf6Gd3DdyMvNrtaxArmgqm-UrW6Aw",
+    authDomain: "yaju-201ac.firebaseapp.com",
+    databaseURL: "https://yaju-201ac.firebaseio.com",
+    storageBucket: "yaju-201ac.appspot.com",
+    messagingSenderId: "1052977603772"
+  };
+
+  firebase.initializeApp(config);
+  var inFile = document.getElementById("output").files[0];
+  var storageRef = firebase.storage().ref();
+  var referencia = storageRef.child('usuarios');
+  var upload = referencia.put(inFile);
+  
+}
 </script>
 </head>
 <body>
-    <?php require_once("cabecera.php");?>
+    <?php require_once("cabecera.php");
+ if(isset($_GET["error"])){
+   $error=$_GET["error"];
+   if($error=="usuario"){
+     echo ('<script language="javascript">alert("El usuario escogido no se encuentra disponible");</script>'); 
+   }
+ }
+  ?>
+  <article>
     <div align="center">
       <h2>Bienvenido a Yaj&uacute;</h2>
   </div>
@@ -137,10 +169,15 @@ $('.email').focusout(function(){
             <p>Correo: <input id="mail" type="text" name="txtCorreo" class="email"/></p>
             <p>Password: <input type="password" name="txtPassword"/></p>
             <p>Confirmar Password: <input type="password" name="txtPasswordConfirm"/></p>
-            <p><input type="submit" name="btnSubmit" value="Registrate" /></p>
+            <p>Foto: <input type="file" accept="image/*" onchange="loadFile(event)"></p>
+            <p><img name="imagen" id="output" height="100" width="100"/></p>
+            <p><input type="submit" name="btnSubmit" value="Registrate" onclick="uploadFile()"/></p>
         </form>
+      </article>
+   <section>
+<footer>
     <?php require_once("pie.php");?>
+     </footer>
+</section>
 </body>
 </html>
-<?php
-?>

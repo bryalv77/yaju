@@ -17,17 +17,8 @@ $totalReg = ($resultado);
 $totalPag = ceil($totalReg/$maxReg)-1;
 $cursor = null;
 $sqldos="SELECT respuesta,pregunta, fecha, hora, mejor from respuestas where nick = '".$_SESSION["nick"]."';";
-?>
-<html>
-<head>
-    <title>Yaj&uacute; Respuestas</title>
-      <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
-    <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <?php require_once("cabecera.php");?>
-    
+require_once("head.php")?>
+    <article>
     <br />
     <div align = "center">
        <h2>Categorias</h2> 
@@ -55,8 +46,10 @@ $sqldos="SELECT respuesta,pregunta, fecha, hora, mejor from respuestas where nic
         ?>
          <b>Inicia Sesi&oacute;n</b>
         <form name="frm" method="post" action="login.php">
-            <p>Usuario: <input type="text" name="txtUser"/></p>
-            <p>Password: <input type="password" name="txtPassword"/></p>
+            <p>Usuario: <input type="text" name="txtUser"required/></p>
+            <p>Password: <input type="password" name="txtPassword"required/></p>
+          <input type="hidden" name="link" value="<?php echo($url);?>">
+          <input type="hidden" name="parametros" value="<?php echo($parametros);?>">
             <p><input type="submit" name="btnSubmit" value="Login"/></p>
         </form>
         <br />
@@ -119,6 +112,11 @@ $sqldos="SELECT respuesta,pregunta, fecha, hora, mejor from respuestas where nic
     </td>
 </tr>
     </table>
+   </article>
+   <section>
+<footer>
     <?php require_once("pie.php");?>
+     </footer>
+</section>
 </body>
 </html>

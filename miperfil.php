@@ -6,15 +6,8 @@ if(isset($_GET["pregunta"])){
 }
 
 ?>
-<html>
-<head>
-    <title>Yaj&uacute; Respuestas</title>
-      <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
-    <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>    
-    <?php require_once("cabecera.php");?>
+<?php require_once("head.php")?>
+  <article>
     <br />
     <div align = "center">
        <h2><?php if(isset($_SESSION["nombres"])){echo($_SESSION["nombres"]);}?></h2> 
@@ -25,6 +18,11 @@ if(isset($_GET["pregunta"])){
 </ul>
 <p><a href="<?=$_SERVER["HTTP_REFERER"]?>">Atras</a></p>
 <hr /> 
+   </article>
+   <section>
+<footer>
     <?php require_once("pie.php");?>
+     </footer>
+</section>
 </body>
 </html>

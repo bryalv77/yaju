@@ -3,39 +3,31 @@ session_start();
 require_once("funciones.php");
 $nick = $_SESSION["nick"];
 $pregunta = $_GET["pregunta"];
+$ni = $_GET["ni"];
 $respuesta = $_POST["txtRespuesta"];
-$puntos = $_SESSION["puntaje"];
+$puntosactuales = $_SESSION["puntaje"];
 $f=time();
 $fecha = "CURRENT_DATE";
 $hora = "CURRENT_TIME";
 $puntuacion = 0;
+$puntosnuevos=0;
 
+$sqlprimera="select * from respuestas where pregunta='".$pregunta."';";
+$result = $conn->query($sqlprimera);
+if ($result->num_rows >0) {
+}
+else{
+  $puntosnuevos = $puntosnuevos + 1;
+}
 $sql = "INSERT INTO respuestas (id, respuesta, pregunta, nick,  fecha, hora, mejor) VALUES (NULL,'".$respuesta."','".$pregunta."','".$nick."',".$fecha.",".$hora.",".$puntuacion.")";
-echo($sql); 
 if (mysqli_query($conn,$sql)) {
-    $a = 1;
+    $puntosnuevos = $puntosnuevos + 2;
 }
-$sqlans= "UPDATE `usuarios` SET puntaje = puntaje+2 WHERE nick='".$nick."';";
+$sqlans= "UPDATE `usuarios` SET puntaje = puntaje+ ".$puntosnuevos ." WHERE nick='".$nick."';";
 if (mysqli_query($conn,$sqlans)) {
-    if($a==1){
-    session_start();
-        $puntos = $puntos -2;
-    $_SESSION["puntaje"]=$puntos;
+      $puntosactuales = $puntosactuales + $puntosnuevos;
+      $_SESSION["puntaje"]=$puntosactuales;
     }
-}
-$sqlcheck="SELECT pregunta FROM respuestas GROUP BY pregunta HAVING count(*) = 1";
-$result = $conn->query($sqlcheck);
-        if ($result->num_rows >0) {
-         $a=4;   
-        }
-if($a==4){
-$sqlans= "UPDATE `usuarios` SET puntaje = puntaje+1 WHERE nick='".$nick."';";
-if (mysqli_query($conn,$sqlans)) {
-    session_start();
-    $puntos = $puntos +1;
-    $_SESSION["puntaje"]=$puntos;
-}
-}
-header("location:preguntas.php?pregunta=".$pregunta);  
+header("location:preguntas.php?pregunta=".$pregunta."&ni=".$ni."&puntosnuevos=".$puntosnuevos);  
 mysqli_close($conn);
 ?>

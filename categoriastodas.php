@@ -17,16 +17,8 @@ $totalPag = ceil($totalReg/$maxReg)-1;
 $cursor = null;
 $sqldos="SELECT categoria from categorias order by id LIMIT ".$inicio.",".$maxReg;
 ?>
-<html>
-<head>
-    <title>Yaj&uacute; Respuestas</title>
-      <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
-    <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>    
-    <?php require_once("cabecera.php");?>
-    
+<?php require_once("head.php")?>
+    <article>
     <br />
     <div align = "center">
        <h2>Categor&iacute;as</h2> 
@@ -39,19 +31,22 @@ $sqldos="SELECT categoria from categorias order by id LIMIT ".$inicio.",".$maxRe
         if(isset($_SESSION["loged"])){
         if($_SESSION["loged"] == true){
             ?>
-            <p><? echo($_SESSION["nombres"]);?></p>
-            <p>Puntaje:<? echo($_SESSION["puntaje"]);?></p>
+            <p><?php echo($_SESSION["nombres"]);?></p>
+            <p>Puntaje:<?php echo($_SESSION["puntaje"]);?></p>
             <p><img src="https://firebasestorage.googleapis.com/v0/b/yaju-201ac.appspot.com/o/usuarios%2F<?php echo($_SESSION["nick"]);?>.jpg?alt=media"  height="50" width="50"></p>
+            <p><?php echo($_SESSION["nick"]);?></p>
             <a href=perfil.php>Mi Perfil</a>
-            <a href=logout.php>Cerrar Sesi&oacute;n</a>
+            <a href="logout.php?link=<?php echo($url);?>&parametros=<?php echo($parametros);?>">Cerrar Sesi&oacute;n</a>
           <?php  
         }}
         else{
         ?>
                   <b>Inicia Sesi&oacute;n</b>
         <form name="frm" method="post" action="login.php">
-            <p>Usuario: <input type="text" name="txtUser"/></p>
-            <p>Password: <input type="password" name="txtPassword"/></p>
+            <p>Usuario: <input type="text" name="txtUser"required/></p>
+            <p>Password: <input type="password" name="txtPassword"required/></p>
+          <input type="hidden" name="link" value="<?php echo($url);?>">
+          <input type="hidden" name="parametros" value="<?php echo($parametros);?>">
             <p><input type="submit" name="btnSubmit" value="Login"/></p>
         </form>
         <br />
@@ -106,6 +101,11 @@ $sqldos="SELECT categoria from categorias order by id LIMIT ".$inicio.",".$maxRe
     </td>
 </tr>
     </table>
+   </article>
+   <section>
+<footer>
     <?php require_once("pie.php");?>
+     </footer>
+</section>
 </body>
 </html>

@@ -16,11 +16,14 @@ $sql = "INSERT INTO usuarios (nick, password, nombres, apellidos, correo, fechan
 if (mysqli_query($conn, $sql)) {
     session_start();
     $_SESSION["loged"] = true;
-    $_SESSION["nombre"] = $nombre;
+    $_SESSION["nombres"] = $nombre;
     $_SESSION["nick"] = $nick;
     $_SESSION["puntaje"] = $puntuacion;
     header("location:auxaux.php");  
 } 
+else{
+  header("location:error.php?error=usuario");  
+}
 mysqli_close($conn);
 }
 ?>

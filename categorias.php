@@ -21,15 +21,8 @@ $cursor = null;
 $sqldos="SELECT preguntas, nick, fecha, hora from preguntas where categoria = '".$cat."' order by fecha desc, hora desc";
 
 ?>
-<html>
-<head>
-    <title>Yaj&uacute; Respuestas</title>
-      <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
-    <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>    
-    <?php require_once("cabecera.php");?>
+<?php require_once("head.php")?>
+  <article>
     <br />
     <div align = "center">
        <h2><?php echo($cat)?></h2> 
@@ -45,19 +38,21 @@ $sqldos="SELECT preguntas, nick, fecha, hora from preguntas where categoria = '"
        if(isset($_SESSION["loged"])){
         if($_SESSION["loged"] == true){
             ?>
-            <p><? echo($_SESSION["nombres"]);?></p>
-            <p>Puntaje:<? echo($_SESSION["puntaje"]);?></p>
+            <p><?php echo($_SESSION["nombres"]);?></p>
+            <p>Puntaje: <?php echo($_SESSION["puntaje"]);?></p>
             <p><img src="https://firebasestorage.googleapis.com/v0/b/yaju-201ac.appspot.com/o/usuarios%2F<?php echo($_SESSION["nick"]);?>.jpg?alt=media"  height="50" width="50"></p>
             <a href=perfil.php>Mi Perfil</a>
-            <a href=logout.php>Cerrar Sesi&oacute;n</a>
+            <a href="logout.php?link=<?php echo($url);?>&parametros=<?php echo($parametros);?>">Cerrar Sesi&oacute;n</a>
           <?php  
         }}
         else{
         ?>
                   <b>Inicia Sesi&oacute;n</b>
         <form name="frm" method="post" action="login.php">
-            <p>Usuario: <input type="text" name="txtUser"/></p>
-            <p>Password: <input type="password" name="txtPassword"/></p>
+            <p>Usuario: <input type="text" name="txtUser"required/></p>
+            <p>Password: <input type="password" name="txtPassword"required/></p>
+          <input type="hidden" name="link" value="<?php echo($url);?>">
+          <input type="hidden" name="parametros" value="<?php echo($parametros);?>">
             <p><input type="submit" name="btnSubmit" value="Login"/></p>
         </form>
         <br />
@@ -88,7 +83,7 @@ $sqldos="SELECT preguntas, nick, fecha, hora from preguntas where categoria = '"
         else{
                 echo("No hay preguntas a&uacute;n");
             }   
-        $cursor = null;
+        $cursor = null;/*
 ?>
 <tr></tr>
 <tr>
@@ -97,7 +92,7 @@ $sqldos="SELECT preguntas, nick, fecha, hora from preguntas where categoria = '"
             if($pagina>0)
             {
         ?>
-                <a href="categorias.php?pagina=<?php echo($pagina-1); ?>">
+                <a href="categorias.php?&pagina=<?php echo($pagina-1); ?>">
                     Anteriores
                 </a>
         <?php
@@ -111,7 +106,7 @@ $sqldos="SELECT preguntas, nick, fecha, hora from preguntas where categoria = '"
             if($pagina<$totalPag)
             {
         ?>
-            <a href="categorias.php?pagina=<?php echo($pagina+1); ?>">
+            <a href="categorias.php?&pagina=<?php echo($pagina+1); ?>">
                 Siguientes
             </a>
         <?php
@@ -121,24 +116,41 @@ $sqldos="SELECT preguntas, nick, fecha, hora from preguntas where categoria = '"
         ?>
     </td>
 </tr>
+<?php
+*/  
+  ?>
     </table>
         <br /><br /><br />
         <?php
         if(isset($_SESSION["loged"])){
         if($_SESSION["loged"] == true){
+          if(isset($_GET["puntosperdidos"])){
+						$puntosperdidos=$_GET["puntosperdidos"];
+						echo("<script language='javascript'>alert('Has usado ".$puntosperdidos." puntos por tu pregunta realizada');</script>");
+					}
+          if($_SESSION["puntaje"]>=5){
             ?>
-            <form name="frm" method="post" action="preguntando.php?categoria=<?php echo($cat);?>">
-            <p>Nueva Pregunta: <input type="text" style="WIDTH: 1000px;" name="txtPregunta"/></p>
+            <form id = "formulario "name="frm" method="post" action="preguntando.php?categoria=<?php echo($cat);?>">
+            <p>Nueva Pregunta: <input type="text" style="WIDTH: 1000px;" name="txtPregunta" required/> </p>
             <p><input type="submit" name="btnSubmit" value="Preguntar"/></p>
         </form>
-          <?php  
+          <?php //<textarea form="formulario" name="txtPregunta" rows="4" cols="150" required></textarea>
+          }
+          else{
+            echo("<h2>No tiene suficientes puntos para preguntar</h2>");
+          }
         }}
         else{
         ?>
-       <h2>Inicie sesi&oacute;n para responder</h2>
+       <h2>Inicie sesi&oacute;n para participar</h2>
         <?php
         }
         ?>
+   </article>
+   <section>
+<footer>
     <?php require_once("pie.php");?>
+     </footer>
+</section>
 </body>
 </html>

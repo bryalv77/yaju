@@ -1,0 +1,98 @@
+body{
+    font-family: 'Roboto','sans-serif';
+    background-color: #ECF0F1;
+    color:#3498DB;
+    margin-left:30px;
+    margin-rigth:30px;
+}
+#cate{
+  position: relative;
+	width: 300px;
+	padding: 50px;
+	margin: 0 auto;
+	background-color: #fff;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+#preg{
+  position: relative;
+	width: 500px;
+	padding: 50px;
+	margin: 0 auto;
+	background-color: #fff;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+table:not(.special){
+  width:100%;
+}
+h5{
+  color:#3498DB;
+}
+@media (min-width:960px) { 
+footer {
+  background-color:#2C3E50;
+  position: relative;
+  top: 50px;
+  width: 100%;
+  color:#3498DB;
+  height:40px;
+}
+ }
+input[type="text"]
+{
+  font-family: 'Roboto','sans-serif';
+  font-size:14px;
+}
+input[type="password"]
+{
+  font-family:'Roboto','sans-serif';
+  font-size:14px;
+}
+input[type="submit"]
+{
+  font-family: 'Roboto','sans-serif';
+  font-size:14px;
+}
+a {
+    color: #3E454C;
+  text-decoration: none;
+}
+a:hover{
+  background-color: #555;
+    color: white;
+}
+h2{
+    color:#2185C5;
+}
+ul {
+    list-style-type: none;
+
+    padding: 0;
+    overflow: hidden;
+    background-color: #E74C3C;
+     valign: middle;
+}
+
+li {
+    float: left;
+}
+h1{
+    color: #2C3E50;
+  }
+li a {
+    display: block;
+    color: #2C3E50;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+ul#menu li {
+    display:inline;
+}

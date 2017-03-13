@@ -19,17 +19,8 @@ $cursor = null;
 if(isset($_SESSION["nick"])){
   $sqldos="SELECT preguntas, fecha, hora from preguntas where nick = '".$_SESSION["nick"]."';";
 }
-?>
-<html>
-<head>
-    <title>Yaj&uacute; Respuestas</title>
-      <link rel="SHORTCUT ICON" href="imagenes/icon.ico" />
-    <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>  
-    <?php require_once("cabecera.php");?>
-    
+require_once("head.php")?>
+    <article>
     <br />
     <div align = "center">
        <h2>Categorias</h2> 
@@ -39,7 +30,6 @@ if(isset($_SESSION["nick"])){
         <td><b>Mis Preguntas</b></td>
         <td><b>Fecha</b></td>
         <td><b>Hora</b></td>
-        <td><b>Modificar</b></td>
         <td align=right><?php
         if(isset($_SESSION["loged"])){
         if($_SESSION["loged"] == true){
@@ -55,8 +45,10 @@ if(isset($_SESSION["nick"])){
         ?>
           <b>Inicia Sesi&oacute;n</b>
         <form name="frm" method="post" action="login.php">
-            <p>Usuario: <input type="text" name="txtUser"/></p>
-            <p>Password: <input type="password" name="txtPassword"/></p>
+            <p>Usuario: <input type="text" name="txtUser"required/></p>
+            <p>Password: <input type="password" name="txtPassword"required/></p>
+          <input type="hidden" name="link" value="<?php echo($url);?>">
+          <input type="hidden" name="parametros" value="<?php echo($parametros);?>">
             <p><input type="submit" name="btnSubmit" value="Login"/></p>
         </form>
         <br />
@@ -75,12 +67,16 @@ if(isset($_SESSION["nick"])){
                 <td><a href="preguntas.php?pregunta=<?php echo($row["preguntas"]);?>"><?php echo($row["preguntas"])?></a></td>
                 <td><?php echo($row["fecha"])?></td>
                 <td><?php echo($row["hora"])?></td>
-                <td><form name="frm" method="post" action="modificarpregunta.php">
+            <!-- 
+              
+              <td><form name="frm" method="post" action="modificarpregunta.php">
             <p><input type="text" name="nueva"/></p>
-            <p><input type="hidden" name="preguntas" value="<?php echo($row["preguntas"]);?>" /></p>
+            <p><input type="hidden" name="preguntas" value="<?php //echo($row["preguntas"]);?>" /></p>
             <p><input type="submit" name="btnSubmit" value="Modificar"/></p>
         </form></td>
-            </tr>
+            -->   
+  
+  </tr>
 <?php
              }
         }
@@ -118,6 +114,11 @@ if(isset($_SESSION["nick"])){
     </td>
 </tr>
     </table>
+   </article>
+   <section>
+<footer>
     <?php require_once("pie.php");?>
+     </footer>
+</section>
 </body>
 </html>
